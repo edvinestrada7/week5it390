@@ -1,0 +1,125 @@
+<div class="add-item-form">
+  <button 
+    class="toggle-form-button"
+    (click)="toggleForm()"
+    mat-raised-button
+    color="primary"
+  >
+    <i class="material-icons">{{ showForm ? 'close' : 'add' }}</i>
+    {{ showForm ? 'Cancel' : 'Add New Item' }}
+  </button>
+
+  <div *ngIf="showForm" class="form-container">
+    <h3>Add New Inventory Item</h3>
+    
+    <form (ngSubmit)="onSubmit()" class="item-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Item Name *</label>
+          <input
+            type="text"
+            id="name"
+            [(ngModel)]="newItem.name"
+            name="name"
+            required
+            placeholder="Enter item name"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="category">Category *</label>
+          <select
+            id="category"
+            [(ngModel)]="newItem.category"
+            name="category"
+            (change)="onCategoryChange()"
+            required
+          >
+            <option value="">Select a category</option>
+            <option *ngFor="let category of categories" [value]="category">
+              {{ category }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="price">Price *</label>
+          <input
+            type="number"
+            id="price"
+            [(ngModel)]="newItem.price"
+            name="price"
+            min="0"
+            step="0.01"
+            required
+            placeholder="0.00"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="stock">Initial Stock *</label>
+          <input
+            type="number"
+            id="stock"
+            [(ngModel)]="newItem.stock"
+            name="stock"
+            min="0"
+            required
+            placeholder="0"
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="sku">SKU *</label>
+        <input
+          type="text"
+          id="sku"
+          [(ngModel)]="newItem.sku"
+          name="sku"
+          required
+          placeholder="e.g., ELEC-001"
+        >
+        <small>SKU will be auto-generated when category is selected</small>
+      </div>
+
+      <div class="form-group">
+        <label for="image">Image URL</label>
+        <input
+          type="url"
+          id="image"
+          [(ngModel)]="newItem.image"
+          name="image"
+          placeholder="https://example.com/image.jpg"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description *</label>
+        <textarea
+          id="description"
+          [(ngModel)]="newItem.description"
+          name="description"
+          rows="4"
+          required
+          placeholder="Enter item description"
+        ></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button 
+          type="submit" 
+          class="submit-button"
+          mat-raised-button
+          color="primary"
+          [disabled]="!isFormValid()"
+        >
+          <i class="material-icons">save</i>
+          Add Item
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

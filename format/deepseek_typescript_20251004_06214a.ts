@@ -1,17 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { InventoryItem } from './models/inventory-item';
-import { InventoryService } from './services/inventory';
-import { AddItemForm } from './components/add-item-form/add-item-form';
-import { InventoryList } from './components/inventory-list/inventory-list';
-import { InventoryDetail } from './components/inventory-detail/inventory-detail';
+import { InventoryService } from './services/inventory.service';
 
 @Component({
   selector: 'app-root',
-  imports: [AddItemForm, InventoryList, InventoryDetail],
-  templateUrl: './app.html',
-  styleUrl: './app.css'
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
-export class App implements OnInit {
+export class AppComponent implements OnInit {
   title = 'Inventory Management System';
   selectedItem: InventoryItem | null = null;
 
